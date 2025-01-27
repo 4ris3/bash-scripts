@@ -3,17 +3,19 @@
 echo "Put folder path to backup:"
 read BACKUP_FOLDER_PATH
 echo
-echo "Check your PATH $BACKUP_FOLDER_PATH (y/n)"
+echo "Check your PATH $BACKUP_FOLDER_PATH (y/n):"
 read YES_NO
 YES_NO=$(echo "$YES_NO" | tr '[:upper:]' '[:lower:]') 
+echo
+BACKUP_DATE=$(date +'%d-%m-%Y')
 
 if [ "$YES_NO" = "y" ]; then
 
     if  [ -d "$BACKUP_FOLDER_PATH" ]; then
         echo "Directory exists, now we made some magic..."
         FOLDER_NAME=$(basename "$BACKUP_FOLDER_PATH")
-        echo "Make /backup/$FOLDER_NAME"
-        sudo mkdir -p /backup/$FOLDER_NAME/
+        sudo mkdir -p /backup/$FOLDER_NAME/$FOLDER_NAME-$BACKUP_DATE
+        echo "Done! /backup/$FOLDER_NAME/$FOLDER_NAME-$BACKUP_DATE"
 
     else 
         echo "Wrong path"
